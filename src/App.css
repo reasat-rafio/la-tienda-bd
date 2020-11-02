@@ -24,6 +24,7 @@ textarea {
    grid-template-columns: 1fr;
    height: 100%;
 }
+
 a:hover {
    color: #ff8000;
 }
