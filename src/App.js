@@ -11,8 +11,6 @@ const App = () => {
       sort: "",
    });
 
-   console.log(state);
-
    return (
       <div className="grid-container">
          <header>
