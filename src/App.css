@@ -199,3 +199,26 @@ footer {
 .total > div {
    font-size: 2rem;
 }
+
+/* Checkout Form */
+
+form {
+   width: 100%;
+}
+
+.form-container {
+   padding: 0;
+   list-style-type: none;
+   width: 100%;
+}
+
+.form-container li {
+   display: flex;
+   flex-direction: column;
+   padding: 1rem;
+}
+
+input {
+   padding: 1rem;
+   border: 0.1rem #c0c0c0 solid;
+}

@@ -1,7 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import formatCurrency from "../util";
 
-const Cart = ({ cartItems, removeFromCart }) => {
+const Cart = ({ cartItems, removeFromCart, createOrder }) => {
+   const [showCheckout, setShowCheckout] = useState(false);
+   const [inputHnadler, setInputHnadler] = useState({
+      name: "",
+      email: "",
+      address: "",
+   });
+
+   const handleInput = (e) => {
+      const input = {
+         ...inputHnadler,
+         [e.target.name]: e.target.value,
+      };
+      setInputHnadler(input);
+   };
+   const placeOrder = (e) => {
+      e.preventDefault();
+      const { name, email, address } = inputHnadler;
+      const order = {
+         name,
+         email,
+         address,
+         cartItems,
+      };
+      createOrder(order);
+   };
+
    return (
       <div>
          {cartItems.length === 0 ? (
@@ -34,16 +60,71 @@ const Cart = ({ cartItems, removeFromCart }) => {
                ))}
             </ul>
             {cartItems.length !== 0 && (
-               <div className="cart">
-                  <div className="total">
-                     <div>
-                        Total:
-                        {formatCurrency(
-                           cartItems.reduce((a, c) => a + c.price * c.count, 0)
-                        )}
+               <div>
+                  <div className="cart">
+                     <div className="total">
+                        <div>
+                           Total:
+                           {formatCurrency(
+                              cartItems.reduce(
+                                 (a, c) => a + c.price * c.count,
+                                 0
+                              )
+                           )}
+                        </div>
+                        <button
+                           onClick={() => {
+                              setShowCheckout(true);
+                           }}
+                           className="button primary"
+                        >
+                           Procced
+                        </button>
                      </div>
-                     <button className="button primary">Procced</button>
                   </div>
+                  {showCheckout && (
+                     <div className="cart">
+                        <form onSubmit={placeOrder}>
+                           <ul className="form-container">
+                              <li>
+                                 <lebal>Email</lebal>
+                                 <input
+                                    name="email"
+                                    type="email"
+                                    required
+                                    onChange={handleInput}
+                                 ></input>
+                              </li>
+                              <li>
+                                 <lebal>Name</lebal>
+                                 <input
+                                    name="name"
+                                    type="text"
+                                    required
+                                    onChange={handleInput}
+                                 ></input>
+                              </li>
+                              <li>
+                                 <lebal>Address</lebal>
+                                 <input
+                                    name="address"
+                                    type="text"
+                                    required
+                                    onChange={handleInput}
+                                 ></input>
+                              </li>
+                              <li>
+                                 <button
+                                    className="button primary"
+                                    type="submit"
+                                 >
+                                    Checkout
+                                 </button>
+                              </li>
+                           </ul>
+                        </form>{" "}
+                     </div>
+                  )}
                </div>
             )}
          </div>
