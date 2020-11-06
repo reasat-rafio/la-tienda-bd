@@ -14,45 +14,42 @@ const App = () => {
          ? JSON.parse(localStorage.getItem("cartItems"))
          : []
    );
-   const [products, setProducts] = useState(data.products);
-   const [size, setSize] = useState("");
-   const [sort, setSort] = useState("");
 
-   const filterProducts = (event) => {
-      if (event.target.value === "") {
-         setProducts(data.products);
-         setSize(event.target.value);
-      } else {
-         setSize(event.target.value);
-         setProducts(
-            data.products.filter(
-               (p) => p.availableSizes.indexOf(event.target.value) >= 0
-            )
-         );
-      }
-   };
+   // const filterProducts = (event) => {
+   //    if (event.target.value === "") {
+   //       setProducts(data.products);
+   //       setSize(event.target.value);
+   //    } else {
+   //       setSize(event.target.value);
+   //       setProducts(
+   //          data.products.filter(
+   //             (p) => p.availableSizes.indexOf(event.target.value) >= 0
+   //          )
+   //       );
+   //    }
+   // };
 
-   const sortProducts = (event) => {
-      const sort = event.target.value;
-      setSort(sort);
-      setProducts(
-         products
-            .slice()
-            .sort((a, b) =>
-               sort === "lowest"
-                  ? a.price > b.price
-                     ? 1
-                     : -1
-                  : sort === "highest"
-                  ? a.price < b.price
-                     ? 1
-                     : -1
-                  : a._id > b._id
-                  ? 1
-                  : -1
-            )
-      );
-   };
+   // const sortProducts = (event) => {
+   //    const sort = event.target.value;
+   //    setSort(sort);
+   //    setProducts(
+   //    products
+   //       .slice()
+   //       .sort((a, b) =>
+   //          sort === "lowest"
+   //             ? a.price > b.price
+   //                ? 1
+   //                : -1
+   //             : sort === "highest"
+   //             ? a.price < b.price
+   //                ? 1
+   //                : -1
+   //             : a._id > b._id
+   //             ? 1
+   //             : -1
+   //       )
+   // );
+   // };
 
    const addToCart = (product) => {
       const incartItems = cartItems.slice();
@@ -91,14 +88,8 @@ const App = () => {
             <main>
                <div className="content">
                   <div className="main">
-                     <Filter
-                        count={products.length}
-                        size={size}
-                        sort={sort}
-                        filterProducts={filterProducts}
-                        sortProducts={sortProducts}
-                     />
-                     <Products addToCart={addToCart} products={products} />
+                     <Filter />
+                     <Products addToCart={addToCart} />
                   </div>
                   <div className="sidebar">
                      <Cart

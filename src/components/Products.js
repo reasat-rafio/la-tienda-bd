@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../actions/productAction";
 
 const Products = ({ addToCart }) => {
-   const products = useSelector((s) => s.productsReducer.items);
+   const products = useSelector((s) => s.productsReducer.filteredItems);
    const [product, setProduct] = useState(null);
 
    const dispatch = useDispatch();
